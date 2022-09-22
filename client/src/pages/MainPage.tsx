@@ -16,6 +16,8 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useEffect, useState } from 'react';
+import { DBStudent, getStudent } from '../connector/testConn';
 
 const drawerWidth: number = 240;
 
@@ -71,10 +73,18 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
     const [open, setOpen] = React.useState(true);
+    const [student , setStudent] = useState<Array<DBStudent>>([])
     const toggleDrawer = () => {
         setOpen(!open);
     };
-
+    const requsetGetStudent = async ()=>{
+        const response :Array<DBStudent> = await getStudent();
+        setStudent([...student, ...response])
+    }
+    useEffect(()=>{
+        requsetGetStudent()
+    },[])
+    console.log(student)
     return (
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
