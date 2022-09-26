@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useEffect, useState } from 'react';
 import { DBStudent, getStudent } from '../connector/testConn';
+import MapComp from '../components/MapComp';
 
 const drawerWidth: number = 240;
 
@@ -156,19 +157,9 @@ function DashboardContent() {
                     <Toolbar />
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3}>
-                            {/* Chart */}
                             <Grid item xs={12} md={8} lg={9}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
-                                    }}
-                                >
-                                </Paper>
+                                <MapComp/>
                             </Grid>
-                            {/* Recent Deposits */}
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper
                                     sx={{
@@ -180,7 +171,6 @@ function DashboardContent() {
                                 >
                                 </Paper>
                             </Grid>
-                            {/* Recent Orders */}
                             <Grid item xs={12}>
                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                 </Paper>

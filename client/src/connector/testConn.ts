@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { API_CURL } from '../connector/URL';
 
-axios.defaults.withCredentials = true;
 
 export interface DBStudent {
     id: number;
@@ -28,5 +27,12 @@ export const updateStudent = async (id:number, name: string, email: string) => {
 
 export const deleteStudent = async (id:number) => {
     const res = await axios.delete(`${API_CURL}/api/v1/student/${id}`);
+    return res.data;
+}
+
+export const KakaoMapKeywordSearch = async (query: string) =>{
+    const res = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${query}`,
+    { headers: {Authorization: `KakaoAK 6d14dc79fabe2059d567d923273f3225` } }
+    )
     return res.data;
 }
