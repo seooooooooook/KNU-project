@@ -27,7 +27,7 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
+    shouldForwardProp: prop => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -44,48 +44,49 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
+const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+            overflowX: 'hidden',
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
+                duration: theme.transitions.duration.leavingScreen,
             }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
-    }),
-);
+            width: theme.spacing(7),
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9),
+            },
+        }),
+    },
+}));
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
     const [open, setOpen] = React.useState(true);
-    const [student , setStudent] = useState<Array<DBStudent>>([])
+    const [student, setStudent] = useState<Array<DBStudent>>([]);
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
-    const requsetGetStudent = async ()=>{
-        const response :Array<DBStudent> = await getStudent();
-        setStudent([...student, ...response])
-    }
-    useEffect(()=>{
-        requsetGetStudent()
-    },[])
-    console.log(student)
+
+    const requsetGetStudent = async () => {
+        const response: Array<DBStudent> = await getStudent();
+        setStudent([...student, ...response]);
+    };
+
+    useEffect(() => {
+        requsetGetStudent();
+    }, []);
+
     return (
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -108,13 +109,7 @@ function DashboardContent() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography
-                            component="h1"
-                            variant="h6"
-                            color="inherit"
-                            noWrap
-                            sx={{ flexGrow: 1 }}
-                        >
+                        <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
                             Main
                         </Typography>
                         <IconButton color="inherit">
@@ -145,10 +140,7 @@ function DashboardContent() {
                 <Box
                     component="main"
                     sx={{
-                        backgroundColor: (theme) =>
-                            theme.palette.mode === 'light'
-                                ? theme.palette.grey[100]
-                                : theme.palette.grey[900],
+                        backgroundColor: theme => (theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900]),
                         flexGrow: 1,
                         height: '100vh',
                         overflow: 'auto',
@@ -158,7 +150,7 @@ function DashboardContent() {
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={8} lg={9}>
-                                <MapComp/>
+                                <MapComp />
                             </Grid>
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper
@@ -168,12 +160,10 @@ function DashboardContent() {
                                         flexDirection: 'column',
                                         height: 240,
                                     }}
-                                >
-                                </Paper>
+                                ></Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                </Paper>
+                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}></Paper>
                             </Grid>
                         </Grid>
                     </Container>

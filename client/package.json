@@ -16,6 +16,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^0.27.2",
+    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-naver-maps": "^0.0.13",
@@ -26,6 +27,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "predeploy" : "yarn build",
+    "deploy" : "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -59,5 +62,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1"
   },
-  "proxy": "http://localhost:8080"
+  "homepage": "https://cozyinfo.com"
 }
