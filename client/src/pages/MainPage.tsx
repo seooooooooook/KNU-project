@@ -16,9 +16,12 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LoginIcon from '@mui/icons-material/Login';
 import { useEffect, useState } from 'react';
-import { DBStudent, getStudent } from '../connector/testConn';
+import { DBStudent, getListHouse, getStudent } from '../connector/testConn';
 import MapComp from '../components/MapComp';
+import { useNavigate } from 'react-router-dom';
+import TableComp from '../components/TableComp';
 
 const drawerWidth: number = 240;
 
@@ -71,20 +74,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })
 const mdTheme = createTheme();
 
 function DashboardContent() {
-    const [open, setOpen] = React.useState(true);
-    const [student, setStudent] = useState<Array<DBStudent>>([]);
+    const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
+    const [list, setList] = React.useState([]);
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
-    const requsetGetStudent = async () => {
-        const response: Array<DBStudent> = await getStudent();
-        setStudent([...student, ...response]);
+    const requsetGetHouseList = async () => {
+        const response = await getListHouse();
+        setList(response[1].dsList);
     };
 
     useEffect(() => {
-        requsetGetStudent();
+        requsetGetHouseList();
     }, []);
 
     return (
@@ -112,10 +116,8 @@ function DashboardContent() {
                         <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
                             Main
                         </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
+                        <IconButton color="inherit" onClick={() => navigate('/signin')}>
+                            <LoginIcon />
                         </IconButton>
                     </Toolbar>
                 </AppBar>
@@ -147,26 +149,26 @@ function DashboardContent() {
                     }}
                 >
                     <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <Box sx={{ p: 4 }}>
                         <Grid container spacing={3}>
-                            <Grid item xs={12} md={8} lg={9}>
+                            <Grid item md={12} lg={6}>
                                 <MapComp />
                             </Grid>
-                            <Grid item xs={12} md={4} lg={3}>
+                            <Grid item md={12} lg={6}>
                                 <Paper
                                     sx={{
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        height: 240,
+                                        flex: 1,
+                                        height: '80vh',
                                     }}
-                                ></Paper>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}></Paper>
+                                >
+                                    {list.length !== 0 && <TableComp list={list} />}
+                                </Paper>
                             </Grid>
                         </Grid>
-                    </Container>
+                    </Box>
                 </Box>
             </Box>
         </ThemeProvider>

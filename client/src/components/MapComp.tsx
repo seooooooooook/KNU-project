@@ -25,8 +25,16 @@ const MapComp = () => {
     });
     return (
         <RenderAfterNavermapsLoaded ncpClientId={'s4t0ye8hyu'} error={<p>Maps Load Error</p>} loading={<p>Maps Loading...</p>}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <TextField label="주소 검색" size="medium" variant="filled" placeholder="검색어를 입력하세요." onChange={e => setSearch(e.target.value)} value={search} onKeyDown={onEnter} />
+            <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <TextField
+                    label="주소 검색"
+                    size="medium"
+                    variant="filled"
+                    placeholder="검색어를 입력하세요. (도로명 주소)"
+                    onChange={e => setSearch(e.target.value)}
+                    value={search}
+                    onKeyDown={onEnter}
+                />
                 <NaverMap
                     mapDivId={'react-naver-map'}
                     style={{

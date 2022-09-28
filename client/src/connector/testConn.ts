@@ -9,6 +9,8 @@ export interface DBStudent {
     age: number;
 }
 
+const servicekeyNOTMINE = 'xuG%2FG4uWZXpNZJY0vZNG4jSO6SOLh7BbS7w5fqNVtnV77r3BOn60Y2jRV%2BXZbNFTK%2FMqqrvHXgSi8LNOV%2FmOHQ%3D%3D';
+
 export const getStudent = async (): Promise<Array<DBStudent>> => {
     const res = await axios.get(`${API_CURL}/api/v1/student`);
     return res.data;
@@ -38,5 +40,10 @@ export const getHousingComplex = async () => {
     const res = await axios.get(
         'http://apis.data.go.kr/B552555/lhLeaseInfo1/lhLeaseInfo1?serviceKey=Yyq5vnzjRfWn5q0IZ1M%2FC%2BjB1EoBha7eEee7zBuEKEGvnyntpgBKaxGY9BrBX%2FGL%2FUlcvmQHfwmkIk6xnQ43lw%3D%3D&PG_SZ=10&PAGE=1',
     );
+    return res.data;
+};
+
+export const getListHouse = async () => {
+    const res = await axios.get(`http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=10&PAGE=1`);
     return res.data;
 };
