@@ -44,6 +44,6 @@ export const getHousingComplex = async () => {
 };
 
 export const getListHouse = async () => {
-    const res = await axios.get(`http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=10&PAGE=1`);
+    const res = await axios.get(`http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=50&PAGE=1`);
     return res.data;
 };

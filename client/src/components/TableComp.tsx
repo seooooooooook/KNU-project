@@ -81,8 +81,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
     );
 }
 
-function createData(categories: string, state: string, region: string, title: string, start_date: string, due_date: string, rnum: string) {
-    return { categories, state, region, title, start_date, due_date, rnum };
+function createData(categories: string, state: string, region: string, title: string, start_date: string, due_date: string, rnum: string, url: string) {
+    return { categories, state, region, title, start_date, due_date, rnum, url };
 }
 
 const TableComp = (props: { list: any[] }) => {
@@ -90,7 +90,7 @@ const TableComp = (props: { list: any[] }) => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const theme = useTheme();
 
-    const rows = props.list.map(el => createData(el.AIS_TP_CD_NM, el.PAN_SS, el.CNP_CD_NM, el.PAN_NM, el.PAN_NT_ST_DT, el.CLSG_DT, el.RNUM));
+    const rows = props.list.map(el => createData(el.AIS_TP_CD_NM, el.PAN_SS, el.CNP_CD_NM, el.PAN_NM, el.PAN_NT_ST_DT, el.CLSG_DT, el.RNUM, el.DTL_URL));
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -135,7 +135,11 @@ const TableComp = (props: { list: any[] }) => {
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.state}</StyledTableCell>
                             <StyledTableCell align="right">{row.region}</StyledTableCell>
-                            <StyledTableCell align="right">{row.title}</StyledTableCell>
+                            <StyledTableCell align="right">
+                                <a href={row.url} target="_blank">
+                                    {row.title}
+                                </a>
+                            </StyledTableCell>
                             <StyledTableCell align="right">{row.start_date}</StyledTableCell>
                             <StyledTableCell align="right">{row.due_date}</StyledTableCell>
                         </StyledTableRow>
