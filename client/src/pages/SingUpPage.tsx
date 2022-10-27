@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Link} from 'react-router-dom';
+import SocialLogin from '../components/molecules/SocialLogin';
 
 
 const theme = createTheme();
@@ -85,6 +86,9 @@ export default function SignUpPage() {
                                     name="email"
                                     autoComplete="email"
                                 />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <SocialLogin/>
                             </Grid>
                         </Grid>
                         <Button

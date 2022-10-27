@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as StyledLink } from '@mui/material';
 import { Link } from 'react-router-dom';
+import SocialLogin from '../components/molecules/SocialLogin';
 
 const theme = createTheme();
 
@@ -48,6 +49,9 @@ export default function SignInPage() {
                         <TextField margin="normal" required fullWidth id="email" label="이메일을 입력해주세요." name="email" autoComplete="email" autoFocus />
                         <TextField margin="normal" required fullWidth name="password" label="비밀번호를 입력해주세요." type="password" id="password" autoComplete="current-password" />
                         <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 상태 유지" />
+                        <Grid item xs={12}>
+                            <SocialLogin/>
+                        </Grid>
                         <Button type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>
                             로그인
                         </Button>
