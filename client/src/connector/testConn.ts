@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { API_CURL } from '../connector/URL';
 
 export interface DBStudent {

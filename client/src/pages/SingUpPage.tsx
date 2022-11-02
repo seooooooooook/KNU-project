@@ -88,7 +88,6 @@ export default function SignUpPage() {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <SocialLogin/>
                             </Grid>
                         </Grid>
                         <Button
@@ -99,6 +98,7 @@ export default function SignUpPage() {
                         >
                             가입 완료
                         </Button>
+                        <SocialLogin/>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <StyledLink variant="body2">
