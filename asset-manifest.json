@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.js": "/cozyinfo/static/js/main.6b9fd9fc.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/cozyinfo/static/js/787.c4e7f8f9.chunk.js",
-    "index.html": "/cozyinfo/index.html",
-    "main.6b9fd9fc.js.map": "/cozyinfo/static/js/main.6b9fd9fc.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/cozyinfo/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.js": "/static/js/main.a95c84da.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/index.html",
+    "static/media/kakao_ico.svg": "/static/media/kakao_ico.d771b7732ccc2eed21b81bf97f711739.svg",
+    "main.a95c84da.js.map": "/static/js/main.a95c84da.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6b9fd9fc.js"
+    "static/js/main.a95c84da.js"
   ]
 }
