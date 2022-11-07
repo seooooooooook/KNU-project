@@ -6,7 +6,7 @@ import MainPage from './pages/MainPage';
 
 function App() {
     return (
-        <Router basename="/main">
+        <Router>
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/signup" element={<SignUpPage />} />

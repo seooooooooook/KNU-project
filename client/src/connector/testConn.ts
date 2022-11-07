@@ -36,6 +36,11 @@ export const KakaoMapKeywordSearch = async (query: string) => {
     return res.data;
 };
 
+export const KakaoGetRegion = async (x: string, y: string) => {
+    const res = await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${x}&y=${y}`, { headers: { Authorization: `KakaoAK 6d14dc79fabe2059d567d923273f3225` } });
+    return res.data;
+};
+
 export const getHousingComplex = async () => {
     const res = await axios.get(
         'http://apis.data.go.kr/B552555/lhLeaseInfo1/lhLeaseInfo1?serviceKey=Yyq5vnzjRfWn5q0IZ1M%2FC%2BjB1EoBha7eEee7zBuEKEGvnyntpgBKaxGY9BrBX%2FGL%2FUlcvmQHfwmkIk6xnQ43lw%3D%3D&PG_SZ=10&PAGE=1',
@@ -43,7 +48,7 @@ export const getHousingComplex = async () => {
     return res.data;
 };
 
-export const getListHouse = async () => {
-    const res = await axios.get(`http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=50&PAGE=1`);
+export const getListHouse = async (regionCode: number) => {
+    const res = await axios.get(`http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=50&PAGE=1&CNP_CD=${regionCode}`);
     return res.data;
 };

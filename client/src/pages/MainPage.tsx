@@ -14,11 +14,14 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import LoginIcon from '@mui/icons-material/Login';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { getListHouse } from '../connector/testConn';
 import MapComp from '../components/MapComp';
 import { useNavigate } from 'react-router-dom';
 import TableComp from '../components/TableComp';
+import { useRecoilValue } from 'recoil';
+import { regionState } from '../store';
+import { regionCode } from '../conf/config';
 
 const drawerWidth: number = 240;
 
@@ -72,6 +75,7 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
     const navigate = useNavigate();
+    const region = useRecoilValue(regionState);
     const [open, setOpen] = React.useState(false);
     const [list, setList] = React.useState([]);
 
@@ -80,13 +84,13 @@ function DashboardContent() {
     };
 
     const requsetGetHouseList = async () => {
-        const response = await getListHouse();
+        const response = await getListHouse(regionCode[region]);
         setList(response[1].dsList);
     };
 
     useEffect(() => {
         requsetGetHouseList();
-    }, []);
+    }, [region]);
 
     return (
         <ThemeProvider theme={mdTheme}>
