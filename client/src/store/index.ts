@@ -12,5 +12,5 @@ export const locationState = atom<locationTypes>({
 
 export const regionState = atom<string>({
     key: 'regionState',
-    default: '서울특별시',
+    default: '',
 });
