@@ -50,8 +50,46 @@ export const getHousingComplex = async () => {
 
 export const getListHouse = async (regionCode: number) => {
     const requestUrl = regionCode
-        ? `http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=50&PAGE=1&CNP_CD=${regionCode}`
-        : `http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=50&PAGE=1`;
+        ? `http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=10&PAGE=1&CNP_CD=${regionCode}`
+        : `http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1?serviceKey=${servicekeyNOTMINE}&PG_SZ=10&PAGE=1`;
     const res = await axios.get(requestUrl);
     return res.data;
 };
+// if (e.key === 'Enter') {
+//     const res = await KakaoMapKeywordSearch(search);
+//     const searchedLoc = await KakaoGetRegion(res.documents[0]?.x, res.documents[0]?.y);
+//     setRegion(searchedLoc.documents[0]?.region_1depth_name);
+//     setLoc({ ...loc, lat: parseFloat(res.documents[0]?.y), lng: parseFloat(res.documents[0]?.x) });
+// }
+
+export const getListDetail = async (a:string, b:string, c:string,d:string) => {
+    const requestUrl = `http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1?serviceKey=${servicekeyNOTMINE}&SPL_INF_TP_CD=${a}&CCR_CNNT_SYS_DS_CD=${b}&PAN_ID=${c}&UPP_AIS_TP_CD=${d}`
+    const res = await axios.get(requestUrl);
+    try{
+        const address= res.data[1].dsCtrtPlc[0].CTRT_PLC_ADR;
+        const result = await KakaoMapKeywordSearch(address);
+        const loc = {
+            lat: parseFloat(result.documents[0]?.y),
+            lng: parseFloat(result.documents[0]?.x),
+        }
+        console.log(loc)
+        return loc;
+
+    }catch (e){
+
+    }
+
+};
+
+export const getAccessToken = async (code:string) => {
+    const reqdata = {
+        code: code
+    }
+
+    const res = await axios({
+        url: `http://localhost:8080/api/auth/token`,
+        method: 'get',
+        data: JSON.stringify(reqdata)
+    })
+    return res.data;
+}

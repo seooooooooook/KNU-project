@@ -14,14 +14,15 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import LoginIcon from '@mui/icons-material/Login';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { getListHouse } from '../connector/testConn';
-import MapComp from '../components/MapComp';
+import MapComp, { MapSkeleton } from '../components/MapComp';
 import { useNavigate } from 'react-router-dom';
 import TableComp from '../components/TableComp';
-import { useRecoilValue } from 'recoil';
-import { regionState } from '../store';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { noticeDetailSelector, noticeListState, regionState } from '../store';
 import { regionCode } from '../conf/config';
+import { Skeleton } from '@mui/material';
 
 const drawerWidth: number = 240;
 
@@ -76,8 +77,8 @@ const mdTheme = createTheme();
 function DashboardContent() {
     const navigate = useNavigate();
     const region = useRecoilValue(regionState);
+    const [list, setList] = useRecoilState(noticeListState);
     const [open, setOpen] = React.useState(false);
-    const [list, setList] = React.useState([]);
 
     const toggleDrawer = () => {
         setOpen(!open);
@@ -152,8 +153,10 @@ function DashboardContent() {
                     <Toolbar />
                     <Box sx={{ p: 4 }}>
                         <Grid container spacing={3}>
-                            <Grid item md={12} lg={6}>
-                                <MapComp />
+                            <Grid item md={12} lg={6} height="100%">
+                                <Suspense fallback={<MapSkeleton/>}>
+                                    <MapComp />
+                                </Suspense>
                             </Grid>
                             <Grid item md={12} lg={6}>
                                 <Paper
