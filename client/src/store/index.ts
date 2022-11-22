@@ -21,6 +21,11 @@ export const noticeListState = atom({
     default: [],
 })
 
+export const accessTokenState = atom({
+    key: 'accessTokenState',
+    default: null
+})
+
 export const noticeDetailSelector = selector({
     key: 'noticeDetailSelector',
     get: ({get}) => {

@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { getAccessToken } from '../connector/testConn';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 const Loading = () => {
-    const queryString = require('query-string');
-    const reqAccesstoken =async(code : string )=>{
-        const res = await getAccessToken(code);
-        alert(res)
+    const location = useLocation();
+    const { code } = queryString.parse(location.search);
+    const reqAccesstoken =async()=>{
+        if(typeof code === 'string') {
+            const res = await getAccessToken(code);
+            alert(res)
+        }
     }
 
     useEffect(()=>{
-        const res = queryString.parse(window.location.search);
-
-        if(res)reqAccesstoken(res.code)
-    },[])
+        if(code) reqAccesstoken();
+    },[code])
     return (
         <div>
             loading....

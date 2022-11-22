@@ -82,14 +82,17 @@ export const getListDetail = async (a:string, b:string, c:string,d:string) => {
 };
 
 export const getAccessToken = async (code:string) => {
-    const reqdata = {
-        code: code
-    }
-
     const res = await axios({
-        url: `http://localhost:8080/api/auth/token`,
+        url: `http://localhost:8080/login?code=${code}`,
         method: 'get',
-        data: JSON.stringify(reqdata)
+    })
+    return res.data;
+}
+
+export const getAccessTokentest = async () => {
+    const res = await axios({
+        url: `http://localhost:8080/login`,
+        method: 'get',
     })
     return res.data;
 }
